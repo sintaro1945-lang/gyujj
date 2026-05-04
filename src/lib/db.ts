@@ -57,7 +57,7 @@ export async function seedDatabase() {
         costPrice: 68000,
         stock: 50,
         barcode: '8991234567890',
-        image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=800'
+        image: 'https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?auto=format&fit=crop&q=80&w=800'
       },
       {
         name: 'Minyak Goreng 2L',
@@ -84,7 +84,7 @@ export async function seedDatabase() {
         costPrice: 25000,
         stock: 15,
         barcode: '8991234567893',
-        image: 'https://images.unsplash.com/photo-1582722134903-b1299df75051?auto=format&fit=crop&q=80&w=800'
+        image: 'https://images.unsplash.com/photo-1553390774-b4822481c894?auto=format&fit=crop&q=80&w=800'
       },
       {
         name: 'Indomie Goreng Satuan',
@@ -93,7 +93,7 @@ export async function seedDatabase() {
         costPrice: 2800,
         stock: 240,
         barcode: '8991234567894',
-        image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&q=80&w=800'
+        image: 'https://images.unsplash.com/photo-1626074312411-9a9ed2c7e096?auto=format&fit=crop&q=80&w=800'
       },
       {
         name: 'Susu Kental Manis',

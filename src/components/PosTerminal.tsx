@@ -133,27 +133,27 @@ export default function PosTerminal() {
   return (
     <div className="flex flex-col lg:flex-row gap-8 h-full pb-20 lg:pb-0">
       {/* Left: Product Selection */}
-      <div className="flex-[1.5] flex flex-col gap-6 overflow-hidden">
+      <div className="flex-[2] flex flex-col gap-6 overflow-hidden">
         <div className="flex gap-4">
-          <div className="flex-1 bg-white border-2 border-zinc-900 px-4 py-3 flex items-center gap-3">
-            <Search className="text-zinc-400" size={20} />
+          <div className="flex-1 bg-white border-2 border-zinc-900 px-4 py-2 flex items-center gap-3">
+            <Search className="text-zinc-400" size={18} />
             <input 
               type="text" 
-              placeholder="Scan Barcode / Cari Produk..."
+              placeholder="Scan Barcode / Cari..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="bg-transparent w-full focus:outline-none font-bold placeholder-zinc-300"
+              className="bg-transparent w-full focus:outline-none font-bold placeholder-zinc-300 text-sm"
             />
           </div>
-          <button className="w-14 h-14 bg-blue-600 text-white flex items-center justify-center cursor-pointer shadow-lg active:scale-95 transition-transform">
-            <Plus size={24} strokeWidth={2.5} />
+          <button className="w-12 h-12 bg-blue-600 text-white flex items-center justify-center cursor-pointer shadow-lg active:scale-95 transition-transform">
+            <Plus size={20} strokeWidth={3} />
           </button>
         </div>
 
         <div className="flex gap-2 pb-2 overflow-x-auto custom-scrollbar whitespace-nowrap">
-          <button className="px-4 py-2 bg-zinc-900 text-white text-[10px] font-black uppercase tracking-widest rounded-full">Semua</button>
+          <button className="px-3 py-1.5 bg-zinc-900 text-white text-[9px] font-black uppercase tracking-widest rounded-full">Semua</button>
           {['Sembako', 'Minuman', 'Makanan', 'Elektronik', 'Kesehatan'].map(cat => (
-            <button key={cat} className="px-4 py-2 bg-white border border-zinc-200 text-zinc-500 text-[10px] font-black uppercase tracking-widest rounded-full hover:border-zinc-900 transition-colors">{cat}</button>
+            <button key={cat} className="px-3 py-1.5 bg-white border border-zinc-200 text-zinc-500 text-[9px] font-black uppercase tracking-widest rounded-full hover:border-zinc-900 transition-colors">{cat}</button>
           ))}
         </div>
 
@@ -164,31 +164,31 @@ export default function PosTerminal() {
                <p className="font-black italic uppercase tracking-tighter text-xl">Produk Tidak Ditemukan</p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-4">
+            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5 gap-3 pb-4">
               {products.map((product) => (
                 <motion.button
                   key={product.id}
                   whileHover={{ y: -4, borderColor: '#2563eb' }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => addToCart(product)}
-                  className="bg-white p-4 border-2 border-transparent shadow-sm flex flex-col items-start gap-3 text-left transition-all group relative overflow-hidden"
+                  className="bg-white p-3 border-2 border-transparent shadow-sm flex flex-col items-start gap-2 text-left transition-all group relative overflow-hidden"
                 >
-                  <div className="w-full aspect-video rounded-lg bg-zinc-100 flex items-center justify-center overflow-hidden">
+                  <div className="w-full aspect-square rounded-lg bg-zinc-100 flex items-center justify-center overflow-hidden">
                     {product.image ? (
-                        <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                        <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                     ) : (
                         <span className="text-zinc-300 font-black uppercase text-[10px] italic">No Image</span>
                     )}
                   </div>
                   <div className="w-full">
-                    <h3 className="text-sm font-black text-zinc-900 leading-tight mb-1 line-clamp-2 italic">{product.name}</h3>
+                    <h3 className="text-[12px] font-black text-zinc-900 leading-tight mb-1 line-clamp-1 italic">{product.name}</h3>
                     <div className="flex items-center justify-between mt-auto">
-                        <span className="text-blue-600 font-black text-base italic tracking-tighter">{formatCurrency(product.price)}</span>
+                        <span className="text-blue-600 font-black text-sm italic tracking-tighter">{formatCurrency(product.price)}</span>
                         <span className={cn(
-                            "text-[9px] font-black uppercase tracking-widest",
+                            "text-[8px] font-black uppercase tracking-widest",
                             product.stock > 5 ? "text-zinc-400" : "text-red-500"
                         )}>
-                            Stok: {product.stock}
+                            S: {product.stock}
                         </span>
                     </div>
                   </div>
@@ -200,18 +200,18 @@ export default function PosTerminal() {
       </div>
 
       {/* Right: Checkout Sidebar */}
-      <div className="flex-1 bg-white border-l border-zinc-200 flex flex-col -m-4 md:-m-6 lg:-m-8 md:ml-0 overflow-hidden">
-        <div className="p-8 flex flex-col h-full">
-          <div className="flex justify-between items-end mb-8">
-            <h2 className="text-2xl font-black uppercase tracking-tighter italic">Keranjang</h2>
-            <span className="text-[10px] font-black text-zinc-400 uppercase tracking-widest">{cart.length} Produk</span>
+      <div className="flex-1 bg-white border-l border-zinc-200 flex flex-col -m-4 md:-m-6 lg:-m-8 md:ml-0 overflow-hidden min-w-[320px]">
+        <div className="p-6 flex flex-col h-full">
+          <div className="flex justify-between items-end mb-6">
+            <h2 className="text-xl font-black uppercase tracking-tighter italic">Keranjang</h2>
+            <span className="text-[9px] font-black text-zinc-400 uppercase tracking-widest">{cart.length} Unit</span>
           </div>
 
-          <div className="flex-1 overflow-y-auto px-1 flex flex-col gap-6 custom-scrollbar mb-8">
+          <div className="flex-1 overflow-y-auto px-1 flex flex-col gap-4 custom-scrollbar mb-6">
             {cart.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-64 text-zinc-200">
-                 <ShoppingCart size={80} strokeWidth={1} className="mb-4" />
-                 <p className="text-[10px] font-black uppercase tracking-[0.3em]">Kosong</p>
+                 <ShoppingCart size={60} strokeWidth={1} className="mb-4" />
+                 <p className="text-[9px] font-black uppercase tracking-[0.3em]">Kosong</p>
               </div>
             ) : (
               cart.map((item) => (
@@ -220,57 +220,57 @@ export default function PosTerminal() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   key={item.productId}
-                  className="flex gap-4 items-center border-b border-zinc-100 pb-4 group"
+                  className="flex gap-3 items-center border-b border-zinc-100 pb-3 group"
                 >
-                  <div className="w-12 h-12 bg-zinc-100 rounded-lg shrink-0 flex items-center justify-center overflow-hidden">
+                  <div className="w-10 h-10 bg-zinc-100 rounded-lg shrink-0 flex items-center justify-center overflow-hidden">
                      {item.product.image ? (
                           <img src={item.product.image} alt={item.name} className="w-full h-full object-cover" />
                      ) : (
-                          <Package size={20} className="text-zinc-300" />
+                          <Package size={16} className="text-zinc-300" />
                      )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-black text-sm text-zinc-900 leading-tight italic truncate">{item.name}</p>
-                    <div className="flex items-center gap-3 mt-1">
+                    <p className="font-black text-[11px] text-zinc-900 leading-tight italic truncate">{item.name}</p>
+                    <div className="flex items-center gap-2 mt-1">
                         <div className="flex items-center bg-zinc-100 rounded-md p-0.5">
-                            <button onClick={() => updateQuantity(item.productId, -1)} className="p-1 hover:text-red-500 transition-colors"><Minus size={12} strokeWidth={3} /></button>
-                            <span className="w-6 text-center text-[10px] font-black">{item.quantity}</span>
-                            <button onClick={() => updateQuantity(item.productId, 1)} className="p-1 hover:text-blue-500 transition-colors"><Plus size={12} strokeWidth={3} /></button>
+                            <button onClick={() => updateQuantity(item.productId, -1)} className="p-0.5 hover:text-red-500 transition-colors"><Minus size={10} strokeWidth={4} /></button>
+                            <span className="w-5 text-center text-[9px] font-black">{item.quantity}</span>
+                            <button onClick={() => updateQuantity(item.productId, 1)} className="p-0.5 hover:text-blue-500 transition-colors"><Plus size={10} strokeWidth={4} /></button>
                         </div>
-                        <span className="text-[10px] font-bold text-zinc-400 italic">{formatCurrency(item.price)}</span>
+                        <span className="text-[9px] font-bold text-zinc-400 italic">{formatCurrency(item.price)}</span>
                     </div>
                   </div>
                   <div className="text-right flex flex-col items-end gap-1">
-                    <span className="font-black text-sm text-zinc-900 italic tracking-tighter">{formatCurrency(item.subtotal)}</span>
-                    <button onClick={() => removeFromCart(item.productId)} className="text-zinc-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"><Trash2 size={14} /></button>
+                    <span className="font-black text-xs text-zinc-900 italic tracking-tighter">{formatCurrency(item.subtotal)}</span>
+                    <button onClick={() => removeFromCart(item.productId)} className="text-zinc-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"><Trash2 size={12} /></button>
                   </div>
                 </motion.div>
               ))
             )}
           </div>
 
-          <div className="mt-auto pt-8 border-t-4 border-double border-zinc-200">
-            <div className="flex justify-between text-zinc-500 font-bold text-[10px] uppercase tracking-widest mb-2">
+          <div className="mt-auto pt-6 border-t-2 border-dashed border-zinc-200">
+            <div className="flex justify-between text-zinc-500 font-bold text-[9px] uppercase tracking-widest mb-1.5">
               <span>Subtotal</span>
               <span>{formatCurrency(total)}</span>
             </div>
-            <div className="flex justify-between text-zinc-500 font-bold text-[10px] uppercase tracking-widest mb-6">
+            <div className="flex justify-between text-zinc-500 font-bold text-[9px] uppercase tracking-widest mb-4">
               <span>Pajak (PPN 11%)</span>
               <span>{formatCurrency(tax)}</span>
             </div>
-            <div className="flex justify-between items-end mb-8">
-              <span className="font-black text-zinc-900 uppercase text-[10px] tracking-widest">Total Bayar</span>
-              <span className="text-5xl font-black tracking-tighter text-blue-600 italic leading-none">{formatCurrency(grandTotal)}</span>
+            <div className="flex justify-between items-end mb-6">
+              <span className="font-black text-zinc-900 uppercase text-[9px] tracking-widest">Wajib Bayar</span>
+              <span className="text-4xl font-black tracking-tighter text-blue-600 italic leading-none">{formatCurrency(grandTotal)}</span>
             </div>
             
-            <div className="grid grid-cols-2 gap-3 mb-4">
-               <button onClick={() => {setPaymentMethod('cash'); setPaymentModal(true)}} className="py-4 border-2 border-zinc-900 font-black text-[10px] uppercase tracking-[0.2em] hover:bg-zinc-100 transition-colors">Tunai</button>
-               <button onClick={() => {setPaymentMethod('qris'); setPaymentModal(true)}} className="py-4 bg-zinc-900 text-white font-black text-[10px] uppercase tracking-[0.2em] hover:bg-zinc-800 transition-colors">Digital</button>
+            <div className="grid grid-cols-2 gap-2 mb-3">
+               <button onClick={() => {setPaymentMethod('cash'); setPaymentModal(true)}} className="py-2.5 border-2 border-zinc-900 font-black text-[9px] uppercase tracking-[0.2em] hover:bg-zinc-100 transition-colors">Tunai</button>
+               <button onClick={() => {setPaymentMethod('qris'); setPaymentModal(true)}} className="py-2.5 bg-zinc-900 text-white font-black text-[9px] uppercase tracking-[0.2em] hover:bg-zinc-800 transition-colors">Digital</button>
             </div>
             <button 
               disabled={cart.length === 0}
               onClick={() => setPaymentModal(true)}
-              className="w-full py-6 bg-blue-600 text-white font-black text-2xl uppercase tracking-widest shadow-xl shadow-blue-200 active:translate-y-1 transition-all disabled:opacity-50 disabled:shadow-none italic"
+              className="w-full py-4 bg-blue-600 text-white font-black text-lg uppercase tracking-widest shadow-xl shadow-blue-200 active:translate-y-1 transition-all disabled:opacity-50 disabled:shadow-none italic"
             >
               BAYAR SEKARANG
             </button>
@@ -293,40 +293,47 @@ export default function PosTerminal() {
                initial={{ scale: 0.9, opacity: 0 }}
                animate={{ scale: 1, opacity: 1 }}
                exit={{ scale: 0.9, opacity: 0 }}
-               className="relative w-full max-w-md bg-white rounded-[32px] overflow-hidden shadow-2xl"
+               className="relative w-full max-w-sm bg-white border-2 border-zinc-900 shadow-[10px_10px_0_0_#18181b]"
              >
                 <div className="p-8 pb-4">
-                   <h3 className="text-2xl font-black text-slate-800 mb-6">Pembayaran</h3>
-                   <div className="grid grid-cols-3 gap-3 mb-8">
+                   <div className="flex items-center justify-between mb-8">
+                      <h3 className="text-xl font-black text-zinc-900 italic tracking-tighter uppercase">Pembayaran</h3>
+                      <div className="text-right">
+                        <p className="text-[9px] font-black text-zinc-400 uppercase tracking-widest mb-1">Total Tagihan</p>
+                        <p className="text-2xl font-black text-blue-600 italic tracking-tighter">{formatCurrency(grandTotal)}</p>
+                      </div>
+                   </div>
+
+                   <div className="grid grid-cols-3 gap-2 mb-6">
                       <button 
                         onClick={() => setPaymentMethod('cash')}
                         className={cn(
-                            "flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all",
-                            paymentMethod === 'cash' ? "border-brand-blue bg-blue-50 text-brand-blue shadow-md shadow-blue-500/10" : "border-slate-100 text-slate-400 hover:bg-slate-50"
+                            "flex flex-col items-center gap-1.5 p-3 border-2 transition-all",
+                            paymentMethod === 'cash' ? "border-blue-600 bg-blue-50 text-blue-600" : "border-zinc-100 text-zinc-400 hover:bg-zinc-50"
                         )}
                       >
-                         <Banknote />
-                         <span className="text-xs font-bold uppercase tracking-widest">Tunai</span>
+                         <Banknote size={20} />
+                         <span className="text-[8px] font-black uppercase tracking-widest">Tunai</span>
                       </button>
                       <button 
                          onClick={() => setPaymentMethod('card')}
                          className={cn(
-                            "flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all",
-                            paymentMethod === 'card' ? "border-brand-blue bg-blue-50 text-brand-blue shadow-md shadow-blue-500/10" : "border-slate-100 text-slate-400 hover:bg-slate-50"
+                            "flex flex-col items-center gap-1.5 p-3 border-2 transition-all",
+                            paymentMethod === 'card' ? "border-blue-600 bg-blue-50 text-blue-600" : "border-zinc-100 text-zinc-400 hover:bg-zinc-50"
                         )}
                       >
-                         <CreditCard />
-                         <span className="text-xs font-bold uppercase tracking-widest">Debit</span>
+                         <CreditCard size={20} />
+                         <span className="text-[8px] font-black uppercase tracking-widest">Debit</span>
                       </button>
                       <button 
                          onClick={() => setPaymentMethod('qris')}
                          className={cn(
-                            "flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all",
-                            paymentMethod === 'qris' ? "border-brand-blue bg-blue-50 text-brand-blue shadow-md shadow-blue-500/10" : "border-slate-100 text-slate-400 hover:bg-slate-50"
+                            "flex flex-col items-center gap-1.5 p-3 border-2 transition-all",
+                            paymentMethod === 'qris' ? "border-blue-600 bg-blue-50 text-blue-600" : "border-zinc-100 text-zinc-400 hover:bg-zinc-50"
                         )}
                       >
-                         <QrCode />
-                         <span className="text-xs font-bold uppercase tracking-widest">QRIS</span>
+                         <QrCode size={20} />
+                         <span className="text-[8px] font-black uppercase tracking-widest">QRIS</span>
                       </button>
                    </div>
 
